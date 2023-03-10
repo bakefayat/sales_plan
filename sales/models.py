@@ -12,6 +12,7 @@ class SalesPlan(TimeStampedModel):
     is_active = models.BooleanField(default=True, verbose_name='فعال بودن')
     total_capacity = models.IntegerField(verbose_name='حداکثر ظرفیت طرح')
     total_sales = models.IntegerField(default=0, verbose_name='تعداد شرکت کنندگان')
+    description = models.TextField(null=True, verbose_name='توضیحات طرح')
 
     def __str__(self):
         return self.title
@@ -35,7 +36,7 @@ class Sells(models.Model):
         verbose_name = 'فروش'
         verbose_name_plural = 'فروش ها'
 
-    consumer = models.ForeignKey(Consumers, related_name='sell', unique=True, verbose_name='مصرف کننده', on_delete=models.CASCADE)
+    consumer = models.OneToOneField(Consumers, related_name='sell', verbose_name='مصرف کننده', on_delete=models.CASCADE)
     seller = models.ForeignKey(Sellers, related_name='sell', null=True, verbose_name='فروشنده', on_delete=models.SET_NULL)
     sale_plan = models.ForeignKey(SalesPlan, related_name='sell', verbose_name='طرح فروش', on_delete=models.CASCADE)
 
