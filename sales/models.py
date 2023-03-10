@@ -1,4 +1,6 @@
 from django.db import models
+from django.utils.html import format_html
+
 from consumers.models import Consumers
 from core.models import TimeStampedModel
 
@@ -16,6 +18,12 @@ class SalesPlan(TimeStampedModel):
 
     def __str__(self):
         return self.title
+
+    def plan_status(self):
+        if self.is_active:
+            return format_html(f'<span class="label label-success">فعال</span>')
+        else:
+            return format_html(f'<span class="label label-danger">منقضی شده</span>')
 
 
 class Sellers(models.Model):
@@ -36,7 +44,7 @@ class Sells(models.Model):
         verbose_name = 'فروش'
         verbose_name_plural = 'فروش ها'
 
-    consumer = models.OneToOneField(Consumers, related_name='sell', verbose_name='مصرف کننده', on_delete=models.CASCADE)
+    consumer = models.ForeignKey(Consumers, related_name='sell', verbose_name='مصرف کننده', on_delete=models.CASCADE)
     seller = models.ForeignKey(Sellers, related_name='sell', null=True, verbose_name='فروشنده', on_delete=models.SET_NULL)
     sale_plan = models.ForeignKey(SalesPlan, related_name='sell', verbose_name='طرح فروش', on_delete=models.CASCADE)
 
