@@ -1,3 +1,8 @@
 from django.shortcuts import render
+from django.views.generic import ListView
+from .models import SalesPlan
 
-# Create your views here.
+
+class HomeView(ListView):
+    template_name = 'sales/index.html'
+    queryset = SalesPlan.objects.all()

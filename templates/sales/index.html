@@ -1,0 +1,7 @@
+{% extends 'sales/base.html' %}
+
+{% block main %}
+    {% for plan in object_list %}
+        {{ plan.title }}
+    {% endfor %}
+{% endblock %}
