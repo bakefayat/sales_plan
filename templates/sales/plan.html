@@ -1,0 +1,15 @@
+{% extends 'sales/base.html' %}
+
+{% block main %}
+    {% include 'sales/header.html' %}
+
+    <h2>{{ object.title }}</h2>
+
+    <h3>فروشندگان این طرح</h3>
+    # todo!
+    {% for item in object.sellers.all %}
+        <p>{{ item.title }}</p>
+    {% endfor %}
+        ثبت نام
+        استعلام
+{% endblock %}

@@ -5,26 +5,6 @@ from consumers.models import Consumers
 from core.models import TimeStampedModel
 
 
-class SalesPlan(TimeStampedModel):
-    class Meta:
-        verbose_name = 'طرح فروش'
-        verbose_name_plural = 'طرح های فروش'
-
-    title = models.CharField(max_length=255, verbose_name='نام طرح')
-    is_active = models.BooleanField(default=True, verbose_name='فعال بودن')
-    total_capacity = models.IntegerField(verbose_name='حداکثر ظرفیت طرح')
-    description = models.TextField(null=True, verbose_name='توضیحات طرح')
-
-    def __str__(self):
-        return self.title
-
-    def plan_status(self):
-        if self.is_active:
-            return format_html(f'<span class="badge bg-success">فعال</span>')
-        else:
-            return format_html(f'<span class="badge bg-danger">منقضی شده</span>')
-
-
 class Sellers(models.Model):
     class Meta:
         verbose_name = 'فروشنده'
@@ -37,6 +17,26 @@ class Sellers(models.Model):
     def __str__(self):
         return self.store_name
 
+
+class SalesPlan(TimeStampedModel):
+    class Meta:
+        verbose_name = 'طرح فروش'
+        verbose_name_plural = 'طرح های فروش'
+
+    title = models.CharField(max_length=255, verbose_name='نام طرح')
+    is_active = models.BooleanField(default=True, verbose_name='فعال بودن')
+    total_capacity = models.IntegerField(verbose_name='حداکثر ظرفیت طرح')
+    sellers = models.ManyToManyField(Sellers, verbose_name='فروشندگان طرح')
+    description = models.TextField(null=True, verbose_name='توضیحات طرح')
+
+    def __str__(self):
+        return self.title
+
+    def plan_status(self):
+        if self.is_active:
+            return format_html(f'<span class="badge bg-success">فعال</span>')
+        else:
+            return format_html(f'<span class="badge bg-danger">منقضی شده</span>')
 
 class Sells(models.Model):
     class Meta:

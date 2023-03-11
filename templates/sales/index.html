@@ -10,7 +10,10 @@
                         <h2>طرح های سامانه</h2>
                         <ul class="list-group list-group-flush">
                             {% for plan in object_list %}
-                                <li class="list-group-item"><a href="">{{ plan.title }}</a> {{ plan.plan_status }}
+                                <li class="list-group-item">
+                                    <a href="{% url 'sales:plan_stores_list' plan.id %}">
+                                        {{ plan.title }}
+                                    </a> {{ plan.plan_status }}
 
                                 {% if plan.description %}
                                  {{ plan.description }}
@@ -29,8 +32,8 @@
             <div class="container px-4">
                 <div class="row gx-4 justify-content-center">
                     <div class="col-lg-8">
-                        <h2>Services we offer</h2>
-                        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut optio velit inventore, expedita quo laboriosam possimus ea consequatur vitae, doloribus consequuntur ex. Nemo assumenda laborum vel, labore ut velit dignissimos.</p>
+                        <h2>درباره ما</h2>
+                        <p class="lead">طرح توزیع عادلانه به منظور رعایت عدالت اجتماعی برگزار گردیده است.</p>
                     </div>
                 </div>
             </div>
@@ -40,8 +43,8 @@
             <div class="container px-4">
                 <div class="row gx-4 justify-content-center">
                     <div class="col-lg-8">
-                        <h2>Contact us</h2>
-                        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero odio fugiat voluptatem dolor, provident officiis, id iusto! Obcaecati incidunt, qui nihil beatae magnam et repudiandae ipsa exercitationem, in, quo totam.</p>
+                        <h2>تماس با ما</h2>
+                        <p class="lead">در صورتی که برنامه به درستی کار نکرد با شماره 09155555555 تماس حاصل نمایید.</p>
                     </div>
                 </div>
             </div>
