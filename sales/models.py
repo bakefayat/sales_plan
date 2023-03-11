@@ -20,9 +20,9 @@ class SalesPlan(TimeStampedModel):
 
     def plan_status(self):
         if self.is_active:
-            return format_html(f'<span class="label label-success">فعال</span>')
+            return format_html(f'<span class="badge bg-success">فعال</span>')
         else:
-            return format_html(f'<span class="label label-danger">منقضی شده</span>')
+            return format_html(f'<span class="badge bg-danger">منقضی شده</span>')
 
 
 class Sellers(models.Model):
