@@ -38,6 +38,13 @@ class SalesPlan(TimeStampedModel):
         else:
             return format_html(f'<span class="badge bg-danger">منقضی شده</span>')
 
+    def sellers_list(self):
+        out = '<ul class="list-group list-group-flush">'
+        for i in self.sellers.all():
+            out += f'<li class="list-group-item">{i.store_name}</li>'
+        out += '</ul>'
+        return format_html(out)
+
 class Sells(models.Model):
     class Meta:
         verbose_name = 'فروش'

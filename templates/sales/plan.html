@@ -3,13 +3,17 @@
 {% block main %}
     {% include 'sales/header.html' %}
 
-    <h2>{{ object.title }}</h2>
+    <section id="plans">
+        <div class="container px-4">
+            <h2>نام طرح: {{ object.title }}</h2>
 
-    <h3>فروشندگان این طرح</h3>
-    # todo!
-    {% for item in object.sellers.all %}
-        <p>{{ item.title }}</p>
-    {% endfor %}
-        ثبت نام
-        استعلام
+            <p class="lead pt-2">فروشندگان این طرح</p>
+            {{ object.sellers_list }}
+            {% for item in object.sellers.all %}
+                <p>{{ item.title }}</p>
+            {% endfor %}
+                <a class="btn btn-success">ثبت نام</a>
+                <a class="btn btn-primary">استعلام ثبت نام قبلی</a>
+        </div>
+    </section>
 {% endblock %}

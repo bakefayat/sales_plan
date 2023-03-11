@@ -9,10 +9,13 @@ class HomeView(ListView):
 
 
 class PlanStoreListView(DetailView):
-    # def get_queryset(self):
-    #     plan_id = self.kwargs.get('pk')
-    #     plan = get_object_or_404(SalesPlan, pk=plan_id)
-    #     return plan
+    # def get_context_data(self, **kwargs):
+    #     pk = self.kwargs.get("pk")
+    #     item = get_object_or_404(SalesPlan, pk=pk)
+    #     sellers = item.sellers.all()
+    #
+    #     context = super().get_context_data(**kwargs)
+    #     context['sellers'] = sellers
 
     template_name = 'sales/plan.html'
     model = SalesPlan

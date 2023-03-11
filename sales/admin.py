@@ -3,7 +3,7 @@ from sales.models import Sellers, SalesPlan, Sells
 
 
 class SalesPlanAdmin(admin.ModelAdmin):
-    list_display = ('title', 'is_active', 'total_capacity', 'description')
+    list_display = ('title', 'is_active', 'total_capacity', 'description', 'sellers_list')
 
 
 admin.site.register(Sellers)
