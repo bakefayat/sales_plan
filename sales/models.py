@@ -13,7 +13,6 @@ class SalesPlan(TimeStampedModel):
     title = models.CharField(max_length=255, verbose_name='نام طرح')
     is_active = models.BooleanField(default=True, verbose_name='فعال بودن')
     total_capacity = models.IntegerField(verbose_name='حداکثر ظرفیت طرح')
-    total_sales = models.IntegerField(default=0, verbose_name='تعداد شرکت کنندگان')
     description = models.TextField(null=True, verbose_name='توضیحات طرح')
 
     def __str__(self):
