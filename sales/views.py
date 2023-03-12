@@ -1,6 +1,9 @@
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import ListView, DetailView
-from .models import SalesPlan, Sellers
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, CreateView
+
+from .forms import SellRegister
+from .models import SalesPlan, Sellers, Sells
 
 
 class HomeView(ListView):
@@ -19,3 +22,15 @@ class PlanStoreListView(DetailView):
 
     template_name = 'sales/plan.html'
     model = SalesPlan
+
+
+class SellCreate(CreateView):
+    template_name = 'sales/sell_register.html'
+    form_class = SellRegister
+    model = Sells
+    success_url = reverse_lazy('sales:plans_list')
+    #
+    # def get_form_kwargs(self):
+    #     kwargs = super().get_form_kwargs()
+    #     kwargs["user"] = self.request.user
+    #     return kwargs

@@ -27,8 +27,11 @@
                 </div>
             </div>
         </nav>
-
-        {% block main %}{% endblock main %}
+        <section id="plans">
+            <div class="container px-4">
+                {% block main %}{% endblock main %}
+            </div>
+        </section>
         {% include 'sales/footer.html' %}
 
         <!-- Bootstrap core JS-->

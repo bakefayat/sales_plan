@@ -45,6 +45,7 @@ class SalesPlan(TimeStampedModel):
         out += '</ul>'
         return format_html(out)
 
+
 class Sells(models.Model):
     class Meta:
         verbose_name = 'فروش'
