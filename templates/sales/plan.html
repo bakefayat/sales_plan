@@ -12,7 +12,7 @@
             {% for item in object.sellers.all %}
                 <p>{{ item.title }}</p>
             {% endfor %}
-                <a class="btn btn-success">ثبت نام</a>
+                <a href="{% url 'sales:sell_create' object.id %}" class="btn btn-success">ثبت نام</a>
                 <a class="btn btn-primary">استعلام ثبت نام قبلی</a>
         </div>
     </section>
