@@ -29,8 +29,3 @@ class SellCreate(CreateView):
     form_class = SellRegister
     model = Sells
     success_url = reverse_lazy('sales:plans_list')
-    #
-    # def get_form_kwargs(self):
-    #     kwargs = super().get_form_kwargs()
-    #     kwargs["user"] = self.request.user
-    #     return kwargs
