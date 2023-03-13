@@ -47,6 +47,8 @@ class SalesPlan(TimeStampedModel):
         out += '</ul>'
         return format_html(out)
 
+    sellers_list.short_description = 'فروشندگان طرح'
+
 
 class Sells(models.Model):
     class Meta:
