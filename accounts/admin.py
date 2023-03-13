@@ -16,7 +16,7 @@ class UserAdmin(admin.ModelAdmin):
             return '+'
         return '-'
 
-    is_seller   .short_description = 'فروشنده'
+    is_seller.short_description = 'فروشنده'
 
 
 admin.site.register(User(), UserAdmin)
