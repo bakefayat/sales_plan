@@ -1,11 +1,9 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
 
-from accounts.mixins import SellerSuperuserMixin
-from .forms import SellRegister
-from .models import SalesPlan, Sellers, Sells
+from accounts.mixins import SellerSuperuserMixin, FieldsMixin
+from .models import SalesPlan, Sells
 
 
 class HomeView(ListView):
@@ -18,8 +16,7 @@ class PlanStoreDetailView(DetailView):
     model = SalesPlan
 
 
-class SellCreate(SellerSuperuserMixin, LoginRequiredMixin, CreateView):
+class SellCreate(SellerSuperuserMixin, FieldsMixin, LoginRequiredMixin, CreateView):
     template_name = 'sales/sell_register.html'
-    form_class = SellRegister
     model = Sells
     success_url = reverse_lazy('sales:plans_list')
