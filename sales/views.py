@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
 
+from accounts.mixins import SellerSuperuserMixin
 from .forms import SellRegister
 from .models import SalesPlan, Sellers, Sells
 
@@ -17,7 +18,7 @@ class PlanStoreDetailView(DetailView):
     model = SalesPlan
 
 
-class SellCreate(LoginRequiredMixin, CreateView):
+class SellCreate(LoginRequiredMixin, SellerSuperuserMixin, CreateView):
     template_name = 'sales/sell_register.html'
     form_class = SellRegister
     model = Sells

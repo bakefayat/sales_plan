@@ -43,6 +43,10 @@ class RegisterPendingView(TemplateView):
     template_name = "accounts/register_done.html"
 
 
+class ForgetPassword(TemplateView):
+    template_name = "accounts/forget.html"
+
+
 class RegisterCompleteView(TemplateView):
     template_name = "accounts/register_complete.html"
 

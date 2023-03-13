@@ -25,6 +25,7 @@ urlpatterns = [
     path("login/", Login.as_view(), name="login"),
     path("register/pending/", RegisterPendingView.as_view(), name="register-pending"),
     path("register/complete/", RegisterCompleteView.as_view(), name="register-complete"),
+    path("forget/", RegisterCompleteView.as_view(), name="password_reset"),
     path("activate/<str:uidb64>/<str:token>/", activate, name="activate"),
     path("register/", RegisterCreateView.as_view(), name="register"),
     path('', include('sales.urls'), name='sales'),
