@@ -18,7 +18,7 @@ class PlanStoreDetailView(DetailView):
     model = SalesPlan
 
 
-class SellCreate(LoginRequiredMixin, SellerSuperuserMixin, CreateView):
+class SellCreate(SellerSuperuserMixin, LoginRequiredMixin, CreateView):
     template_name = 'sales/sell_register.html'
     form_class = SellRegister
     model = Sells

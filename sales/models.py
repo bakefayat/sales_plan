@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.html import format_html
+from django.contrib.auth import get_user_model as User
 
 from consumers.models import Consumers
 from core.models import TimeStampedModel
@@ -10,6 +11,7 @@ class Sellers(models.Model):
         verbose_name = 'فروشنده'
         verbose_name_plural = 'فروشندگان'
 
+    user = models.OneToOneField(User(), on_delete=models.CASCADE, verbose_name='کاربر فروشنده')
     store_name = models.CharField(max_length=255, verbose_name='نام واحد تجاری')
     address = models.TextField(verbose_name='آدرس')
     phone_number = models.CharField(max_length=12, verbose_name='تلفن تماس')
