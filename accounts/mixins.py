@@ -1,6 +1,7 @@
 from django.shortcuts import redirect
 
 from core.utils import check_seller_superuser
+from sales.models import Sellers
 
 
 class SellerSuperuserMixin:
@@ -13,11 +14,13 @@ class SellerSuperuserMixin:
 
 class FormValidMixin:
     def form_valid(self, form):
-        if self.request.is_superuser and self.request.is_authenticated:
+        print(self.request)
+        if self.request.user.is_superuser and self.request.user.is_authenticated:
             form.save()
         else:
             self.obj = form.save(commit=False)
-            self.obj.seller = self.request.user
+            seller = Sellers.objects.filter(user=self.request.user).first()
+            self.obj.seller = seller
             print(self.obj.seller)
         return super().form_valid(form)
 
