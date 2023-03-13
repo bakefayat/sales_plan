@@ -7,10 +7,9 @@
 
             <p class="lead pt-2">فروشندگان این طرح</p>
             {{ object.sellers_list }}
-            {% for item in object.sellers.all %}
-                <p>{{ item.title }}</p>
-            {% endfor %}
+            {% if object.is_active %}
                 <a href="{% url 'sales:sell_create' object.id %}" class="btn btn-success">ثبت نام</a>
+            {% endif %}
                 <a class="btn btn-primary">استعلام ثبت نام قبلی</a>
         </div>
     </section>

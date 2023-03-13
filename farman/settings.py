@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'consumers.apps.ConsumersConfig',
     'sales.apps.SalesConfig',
     'core.apps.CoreConfig',
+
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

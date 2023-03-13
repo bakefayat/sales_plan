@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
@@ -11,20 +12,12 @@ class HomeView(ListView):
     queryset = SalesPlan.objects.all()
 
 
-class PlanStoreListView(DetailView):
-    # def get_context_data(self, **kwargs):
-    #     pk = self.kwargs.get("pk")
-    #     item = get_object_or_404(SalesPlan, pk=pk)
-    #     sellers = item.sellers.all()
-    #
-    #     context = super().get_context_data(**kwargs)
-    #     context['sellers'] = sellers
-
+class PlanStoreDetailView(DetailView):
     template_name = 'sales/plan.html'
     model = SalesPlan
 
 
-class SellCreate(CreateView):
+class SellCreate(LoginRequiredMixin, CreateView):
     template_name = 'sales/sell_register.html'
     form_class = SellRegister
     model = Sells

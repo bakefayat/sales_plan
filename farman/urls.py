@@ -16,7 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from accounts.views import Login, RegisterPendingView, RegisterCompleteView
+from accounts.views import RegisterCreateView, activate
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("login/", Login.as_view(), name="login"),
+    path("register/pending/", RegisterPendingView.as_view(), name="register-pending"),
+    path("register/complete/", RegisterCompleteView.as_view(), name="register-complete"),
+    path("activate/<str:uidb64>/<str:token>/", activate, name="activate"),
+    path("register/", RegisterCreateView.as_view(), name="register"),
     path('', include('sales.urls'), name='sales'),
 ]
