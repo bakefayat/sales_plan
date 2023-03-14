@@ -16,7 +16,7 @@ class PlanStoreDetailView(DetailView):
     model = SalesPlan
 
 
-class SellCreate(SellerSuperuserMixin, FormValidMixin, FieldsMixin, LoginRequiredMixin, CreateView):
+class SellCreate(LoginRequiredMixin, SellerSuperuserMixin, FormValidMixin, FieldsMixin, CreateView):
     template_name = 'sales/sell_register.html'
     model = Sells
     success_url = reverse_lazy('sales:plans_list')

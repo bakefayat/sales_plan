@@ -8,7 +8,7 @@
             <p class="lead pt-2">فروشندگان این طرح</p>
             {{ object.sellers_list }}
             {% if object.is_active %}
-                <a href="{% url 'sales:sell_create' object.id %}" class="btn btn-success">ثبت نام</a>
+                <a href="{% url 'sales:sell_create' object.id %}" class="btn btn-success">ثبت مصرف کننده جدید (مخصوص فروشندگان)</a>
             {% endif %}
                 <a class="btn btn-primary">استعلام ثبت نام قبلی</a>
         </div>

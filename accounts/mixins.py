@@ -9,7 +9,7 @@ class SellerSuperuserMixin:
         if check_seller_superuser(request):
             return super().dispatch(request, *args, **kwargs)
         else:
-            return redirect("sales:home")
+            return redirect("login")
 
 
 class FormValidMixin:
