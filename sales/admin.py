@@ -10,6 +10,10 @@ class SellersAdmin(admin.ModelAdmin):
     list_display = ('user', 'store_name')
 
 
+class SellsAdmin(admin.ModelAdmin):
+    list_display = ('consumer', 'sale_plan', 'seller',)
+
+
 admin.site.register(Sellers, SellersAdmin)
 admin.site.register(SalesPlan, SalesPlanAdmin)
-admin.site.register(Sells)
+admin.site.register(Sells, SellsAdmin)

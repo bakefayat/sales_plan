@@ -14,14 +14,16 @@ class SellerSuperuserMixin:
 
 class FormValidMixin:
     def form_valid(self, form):
+        self.obj = form.save(commit=False)
+        sale_plan = SalesPlan.objects.filter(pk=self.kwargs.pop('pk')).first()
+        self.obj.sale_plan = sale_plan
+
         if self.request.user.is_superuser and self.request.user.is_authenticated:
             form.save()
         else:
             self.obj = form.save(commit=False)
             seller = Sellers.objects.filter(user=self.request.user).first()
-            sale_plan = SalesPlan.objects.filter(pk=self.kwargs.pop('pk')).first()
             self.obj.seller = seller
-            self.obj.sale_plan = sale_plan
         return super().form_valid(form)
 
 
