@@ -57,7 +57,7 @@ class Sells(models.Model):
 
     consumer = models.ForeignKey(Consumers, related_name='sell', verbose_name='مصرف کننده', on_delete=models.CASCADE)
     seller = models.ForeignKey(Sellers, related_name='sell', null=True, verbose_name='فروشنده', on_delete=models.SET_NULL)
-    sale_plan = models.ForeignKey(SalesPlan, related_name='sell', verbose_name='طرح فروش', on_delete=models.CASCADE)
+    sale_plan = models.ForeignKey(SalesPlan, related_name='sell', null=True, verbose_name='طرح فروش', on_delete=models.CASCADE)
 
     def __str__(self):
         return f'{self.consumer} از {self.seller}'
