@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.html import format_html
 from django.contrib.auth import get_user_model as User
@@ -61,3 +62,10 @@ class Sells(models.Model):
 
     def __str__(self):
         return f'{self.consumer} از {self.seller}'
+
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None, *args, **kwargs):
+        sells = Sells.objects.filter(consumer=self.consumer).filter(sale_plan=self.sale_plan)
+        if len(sells) > 1:
+            raise ValidationError('قبلا خرید کرده')
+        super().save(*args, **kwargs)
