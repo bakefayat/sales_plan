@@ -26,8 +26,10 @@ class FormValidMixin:
 
 
 class FieldsMixin:
-    def dispatch(self, request, *args, **kwargs):
+    def __init__(self):
         self.fields = ['consumer', 'sale_plan']
+
+    def dispatch(self, request, *args, **kwargs):
         if request.user.is_superuser:
             self.fields.append('seller')
         return super().dispatch(request, *args, **kwargs)
