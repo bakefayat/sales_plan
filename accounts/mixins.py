@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.shortcuts import redirect
 
 from core.utils import check_seller_superuser
@@ -17,12 +18,15 @@ class FormValidMixin:
         self.obj = form.save(commit=False)
         sale_plan = SalesPlan.objects.filter(pk=self.kwargs.pop('pk')).first()
         self.obj.sale_plan = sale_plan
-
+        if not sale_plan:
+            raise ValidationError("چنین طرحی قابلیت ثبت نام ندارد!")
         if self.request.user.is_superuser and self.request.user.is_authenticated:
             form.save()
         else:
             self.obj = form.save(commit=False)
             seller = Sellers.objects.filter(user=self.request.user).first()
+            if not seller:
+                raise ValidationError("چنین فروشنده ای وجود ندارد.")
             self.obj.seller = seller
         return super().form_valid(form)
 
