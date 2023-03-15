@@ -1,5 +1,7 @@
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.http import HttpResponse
+from django.shortcuts import redirect
 from django.utils.html import format_html
 from django.contrib.auth import get_user_model as User
 
@@ -29,7 +31,6 @@ class SalesPlan(TimeStampedModel):
     title = models.CharField(max_length=255, verbose_name='نام طرح')
     is_active = models.BooleanField(default=True, verbose_name='فعال بودن')
     total_capacity = models.IntegerField(verbose_name='حداکثر ظرفیت طرح')
-    sellers = models.ManyToManyField(Sellers, verbose_name='فروشندگان طرح')
     description = models.TextField(null=True, verbose_name='توضیحات طرح')
 
     def __str__(self):
@@ -41,17 +42,8 @@ class SalesPlan(TimeStampedModel):
         else:
             return format_html(f'<span class="badge bg-danger">منقضی شده</span>')
 
-    def sellers_list(self):
-        out = '<ul class="list-group list-group-flush">'
-        for i in self.sellers.all():
-            out += f'<li class="list-group-item">{i.store_name}</li>'
-        out += '</ul>'
-        return format_html(out)
 
-    sellers_list.short_description = 'فروشندگان طرح'
-
-
-class Sells(models.Model):
+class Sells(TimeStampedModel):
     class Meta:
         verbose_name = 'فروش'
         verbose_name_plural = 'فروش ها'
@@ -59,6 +51,7 @@ class Sells(models.Model):
     consumer = models.ForeignKey(Consumers, related_name='sell', verbose_name='مصرف کننده', on_delete=models.CASCADE)
     seller = models.ForeignKey(Sellers, related_name='sell', null=True, verbose_name='فروشنده', on_delete=models.SET_NULL)
     sale_plan = models.ForeignKey(SalesPlan, related_name='sell', null=True, verbose_name='طرح فروش', on_delete=models.CASCADE)
+    is_valid = models.BooleanField(default=True, verbose_name='یکبار تلاش برای خرید')
 
     def __str__(self):
         return f'{self.consumer} از {self.seller}'
@@ -66,6 +59,7 @@ class Sells(models.Model):
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None, *args, **kwargs):
         sells = Sells.objects.filter(consumer=self.consumer).filter(sale_plan=self.sale_plan)
-        if len(sells) > 1:
-            raise ValidationError('قبلا خرید کرده')
+        if sells:
+            self.is_valid = False
+            print('دوباره ثبت نام کرده است.')
         super().save(*args, **kwargs)

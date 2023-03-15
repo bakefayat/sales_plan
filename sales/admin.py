@@ -3,7 +3,7 @@ from sales.models import Sellers, SalesPlan, Sells
 
 
 class SalesPlanAdmin(admin.ModelAdmin):
-    list_display = ('title', 'is_active', 'total_capacity', 'description', 'sellers_list')
+    list_display = ('title', 'is_active', 'total_capacity', 'description')
 
 
 class SellersAdmin(admin.ModelAdmin):
@@ -11,7 +11,7 @@ class SellersAdmin(admin.ModelAdmin):
 
 
 class SellsAdmin(admin.ModelAdmin):
-    list_display = ('consumer', 'sale_plan', 'seller',)
+    list_display = ('consumer', 'sale_plan', 'seller', 'created', 'is_valid')
 
 
 admin.site.register(Sellers, SellersAdmin)
