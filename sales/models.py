@@ -60,7 +60,9 @@ class Sells(TimeStampedModel):
              update_fields=None, *args, **kwargs):
         sells = Sells.objects.filter(consumer=self.consumer).filter(sale_plan=self.sale_plan)
         if sells:
-            self.is_valid = False
+            #TODO: should be work
+            sells.first().is_valid = False
             print('دوباره ثبت نام کرده است.')
+            #TODO: should delete!
             print(sells.latest('pk'))
         super().save(*args, **kwargs)
