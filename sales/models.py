@@ -62,4 +62,5 @@ class Sells(TimeStampedModel):
         if sells:
             self.is_valid = False
             print('دوباره ثبت نام کرده است.')
+            print(sells.latest('pk'))
         super().save(*args, **kwargs)
