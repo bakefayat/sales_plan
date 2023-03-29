@@ -47,22 +47,11 @@ class Sells(TimeStampedModel):
     class Meta:
         verbose_name = 'فروش'
         verbose_name_plural = 'فروش ها'
-
+        unique_together = ['consumer', 'sale_plan']
+        
     consumer = models.ForeignKey(Consumers, related_name='sell', verbose_name='مصرف کننده', on_delete=models.CASCADE)
     seller = models.ForeignKey(Sellers, related_name='sell', null=True, verbose_name='فروشنده', on_delete=models.SET_NULL)
     sale_plan = models.ForeignKey(SalesPlan, related_name='sell', null=True, verbose_name='طرح فروش', on_delete=models.CASCADE)
-    is_valid = models.BooleanField(default=True, verbose_name='یکبار تلاش برای خرید')
 
     def __str__(self):
         return f'{self.consumer} از {self.seller}'
-
-    def save(self, force_insert=False, force_update=False, using=None,
-             update_fields=None, *args, **kwargs):
-        sells = Sells.objects.filter(consumer=self.consumer).filter(sale_plan=self.sale_plan)
-        if sells:
-            #TODO: should be work
-            sells.first().is_valid = False
-            print('دوباره ثبت نام کرده است.')
-            #TODO: should delete!
-            print(sells.latest('pk'))
-        super().save(*args, **kwargs)
