@@ -2,7 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
 from django.db import IntegrityError
-from django.http import HttpResponse
+from django.shortcuts import render
 
 from accounts.mixins import SellerSuperuserMixin, FieldsMixin, FormValidMixin
 from .models import SalesPlan, Sells
@@ -27,4 +27,4 @@ class SellCreate(LoginRequiredMixin, SellerSuperuserMixin, FormValidMixin, Field
         try:
             return super().form_valid(form)
         except IntegrityError:
-            return HttpResponse('not valid!')
+            return render(self.request, 'sales/twice_buy_error.html')

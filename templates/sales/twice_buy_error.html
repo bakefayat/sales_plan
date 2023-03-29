@@ -1,0 +1,10 @@
+{% extends 'sales/base.html' %}
+
+{% block main %}
+    <p>
+    {{ request.user.get_full_name }} عزیز
+
+        <b>این کاربر قبلا خرید انجام داده است!</b>
+    </p>
+
+{% endblock %}
