@@ -2,9 +2,8 @@
 
 {% block main %}
     <p>
-    {{ request.user.get_full_name }} عزیز
 
-        <b>این کاربر قبلا خرید انجام داده است!</b>
+        {{ consumer.duplicate_sell }}
     </p>
 
 {% endblock %}

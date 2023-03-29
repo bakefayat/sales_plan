@@ -55,3 +55,7 @@ class Sells(TimeStampedModel):
 
     def __str__(self):
         return f'{self.consumer} از {self.seller}'
+
+
+    def duplicate_sell(self):
+        return f'{self.consumer} از {self.seller} قبلا خرید کرده است.'

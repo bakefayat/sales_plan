@@ -27,4 +27,9 @@ class SellCreate(LoginRequiredMixin, SellerSuperuserMixin, FormValidMixin, Field
         try:
             return super().form_valid(form)
         except IntegrityError:
-            return render(self.request, 'sales/twice_buy_error.html')
+            consumer = form.cleaned_data.get('consumer')
+            obj = Sells.objects.filter(consumer=consumer).first()
+            ctx = {'consumer': obj}
+            print('hello')
+            print(ctx['consumer'])
+            return render(self.request, 'sales/twice_buy_error.html', ctx)
